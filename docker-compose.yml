@@ -12,7 +12,7 @@ services:
       DB_NAME: terrabit
       DB_USER: terrabit_user
       DB_PASSWORD: terrabit_password
-      JWT_SECRET: PEGAR_AQUI_LA_CLAVE
+      JWT_SECRET: e9de48927bcf92c4d1ec121b2f6a0b1f5d698e7964db5506d70e5bf84ba2b28e
     networks:
       - terrabit_network
 

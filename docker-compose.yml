@@ -1,0 +1,38 @@
+services:
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: terrabit_backend
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: 192.168.100.20
+      DB_NAME: terrabit
+      DB_USER: terrabit_user
+      DB_PASSWORD: terrabit_password
+      JWT_SECRET: PEGAR_AQUI_LA_CLAVE
+    networks:
+      - terrabit_network
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: terrabit_frontend
+    restart: always
+    ports:
+      - "3000:80"
+    environment:
+      API_USUARIOS_URL: http://192.168.100.10:8080/api
+      API_GESTION_URL: http://192.168.100.10:8080/api
+      API_RECOLECCION_URL: http://192.168.100.10:8080/api
+    depends_on:
+      - backend
+    networks:
+      - terrabit_network
+
+networks:
+  terrabit_network:
+    driver: bridge
